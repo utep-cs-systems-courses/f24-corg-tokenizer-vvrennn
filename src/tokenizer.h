@@ -52,10 +52,17 @@ while (*token != '\0' && !space_char(*token)) {
 return token;
 }
 /* Counts the number of tokens in the string argument. */
-int count_tokens(char *str){
-  int count = 0;
-  
-}
+int count_tokens(char *s){
+    int count = 0;
+    char *token = token_start(str);
+
+    while (token != NULL) {
+      count++;
+      token = token_start(token_terminator(token));
+    }
+
+    return count;
+  }
 
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
@@ -101,7 +108,7 @@ void print_tokens(char **tokens){
 void free_tokens(char **tokens){
   char **p = tokens;
   while (*p != NULL) {
-    (*p);
+    free(*p);
     p++;
   }
   free(tokens);
